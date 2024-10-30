@@ -1,27 +1,24 @@
 #include <stdio.h>
-#include <string.h> //Allows for use of %s
+#include <string.h>
 
 //input the name of the local emergency team
 //output total response time in seconds
 
-int main()
+int main(int argc, char *argv[])
 {
-    int Team_Times[10][6]; //[Rows][Columns], rows are for team names, columns for category times 
-    int team_name; //team name is numbers from 1-10
-    int total_time; //[3]; //Total response time array, mins will be placed in [1] and secs in [2]
-    int triage_time; //Time array for the time to identify patient medical issues, mins will be placed in [1] and secs in [2]
-    int assess_time; //Time array for time to assess Patient,  mins will be placed in [1] and secs in [2]
-    int assign_time;
-    int transfer_time;
-    int fastest_team[5]; //array contains fastest time for each category
-    int n;
-    int x;
-    int y;
+    int Team_Times[10][6]{}; //[Rows][Columns], rows are for team names, columns for category times
+    int team_name{0}; //team name is numbers from 1-10
+    int total_time{0}; //[3]; //Total response time array, mins will be placed in [1] and secs in [2]
+    int triage_time{0}; //Time array for the time to identify patient medical issues, mins will be placed in [1] and secs in [2]
+    int assess_time{0}; //Time array for time to assess Patient,  mins will be placed in [1] and secs in [2]
+    int assign_time{0};
+    int transfer_time{0};
+    int fastest_team[5]{0}; //array contains fastest time for each category
+    int n = 0;
+    int x = 0;
+    int y = 0;
 
     //START OF LOOP
-    n = 0;
-    x = 0;
-    y = 0;
     while (n != 11)
     {
         printf("\nTeam names are numbers 1-10.");
@@ -57,16 +54,19 @@ int main()
 
         Team_Times[n][1] = total_time;
 
+        // DD condition x!=7 will always be true so the loop below will never exit.
         while (x != 7)
         {
+            // DD you are compaing the same entry here... so you will never enter the if.
             if (Team_Times[n+1][x] < Team_Times[n+1][x]) //[ROW][COLUMN]
             {
                 while (y != 7)
                 {
+                    // DD you will exceed the array size here. Array is declared as containing 5 elements. The range you are using here is: [0..6]
                     fastest_team[y] = Team_Times[x][y];
 
                     y = y + 1;
-                } 
+                }
             }
         }
         n++;
@@ -78,25 +78,36 @@ int main()
     n = 0;
     while (x != 5)
     {
-        if (x==0);
+        // DD you should not have a ';' at the end of the if. This is likly your problem here.
+        // a semi colon is an end of statement so what you end up with is:
+        // ```
+        // if (x==0)
+        //    do something
+        // {
+        //   printf(...)
+        // }
+        // ```
+        if (x==0)
         {
-            printf("Fastest Total Time: ",fastest_team[x],"seconds");
+            // printf is slightly different from python... note the use of %d which is to print a decimal, %f is a float.
+            printf("Fastest Total Time: %d seconds",fastest_team[x]);
         }
-        if (x==1);
+        // consider switching the check around as shown here... as it is safer
+        if (1==x)
         {
-            printf("Fastest Triage Time: ",fastest_team[x],"seconds");
+            printf("Fastest Triage Time: %d seconds",fastest_team[x]);
         }
-        if (x==2);
+        if (x==2)
         {
-            printf("Fastest Assessment time: ",fastest_team[x],"seconds");
+            printf("Fastest Assessment time: %d seconds",fastest_team[x]);
         }
-        if (x==3);
+        if (x==3)
         {
-            printf("Fastest Assignment time: ",fastest_team[x],"seconds");
+            printf("Fastest Assignment time: %d seconds",fastest_team[x]);
         }
-        if (x==4);
+        if (x==4)
         {
-            printf("Fastest Transfer time: ",fastest_team[x],"seconds");
+            printf("Fastest Transfer time: %d seconds",fastest_team[x]);
         }
         x = x + 1;
     }
