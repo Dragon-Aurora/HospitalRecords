@@ -10,22 +10,31 @@ int main()
 #define MAX_NUM_OF_TEAMS 100
 
     char team_name[MAX_TEAMNAME_SIZE]; //initialisation of a string
-    int total_time; //Total response time
-    int total_min; //Total response time in minutes
-    int total_sec; //Total response time in seconds
-    int triage_time; //Time to identify patient medical issues
-    int assess_time; //Time to assess Patient
-    int assign_time;
-    int transfer_time;
-    int triage_min;
-    int triage_sec;
-    int assess_min;
-    int assess_sec;
-    int assign_min;
-    int assign_sec;
-    int transfer_min;
-    int transfer_sec;
+    int total_time = 0; //Total response time
+    int total_min = 0; //Total response time in minutes
+    int total_sec = 0; //Total response time in seconds
+    int triage_time = 0; //Time to identify patient medical issues
+    int assess_time = 0; //Time to assess Patient
+    int assign_time = 0;
+    int transfer_time = 0;
+    int triage_min = 0;
+    int triage_sec = 0;
+    int assess_min = 0;
+    int assess_sec = 0;
+    int assign_min = 0;
+    int assign_sec = 0;
+    int transfer_min = 0;
+    int transfer_sec = 0;
     int fastest_team[MAX_NUM_OF_TEAMS];
+
+    // the sizeof() gets the size in bytes of the object.
+    // `(sizeof(fastest_team)/sizeof(int))` calculates the number of elements, which is 5.
+    for (size_t i = 0U; i < (sizeof(fastest_team)/sizeof(int)); ++i)
+    {
+        fastest_team[i] = 0;
+    }
+    // strings or arrays or chars are normally terminated with a '\0'.
+    team_name[0] = '\0';
 
     printf("\nTeam name: ");
     // see https://en.cppreference.com/w/c/io/fscanf

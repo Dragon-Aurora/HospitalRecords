@@ -7,16 +7,26 @@
 int main(int argc, char *argv[])
 {
     int Team_Times[10][6]{}; //[Rows][Columns], rows are for team names, columns for category times
-    int team_name{0}; //team name is numbers from 1-10
-    int total_time{0}; //[3]; //Total response time array, mins will be placed in [1] and secs in [2]
-    int triage_time{0}; //Time array for the time to identify patient medical issues, mins will be placed in [1] and secs in [2]
-    int assess_time{0}; //Time array for time to assess Patient,  mins will be placed in [1] and secs in [2]
-    int assign_time{0};
-    int transfer_time{0};
-    int fastest_team[5]{0}; //array contains fastest time for each category
+    int team_name = 0; //team name is numbers from 1-10
+    int total_time = 0; //[3]; //Total response time array, mins will be placed in [1] and secs in [2]
+    int triage_time = 0; //Time array for the time to identify patient medical issues, mins will be placed in [1] and secs in [2]
+    int assess_time = 0; //Time array for time to assess Patient,  mins will be placed in [1] and secs in [2]
+    int assign_time = 0;
+    int transfer_time = 0;
+    int fastest_team[5]; //array contains fastest time for each category
     int n = 0;
     int x = 0;
     int y = 0;
+
+    // the sizeof() gets the size in bytes of the object.
+    // `(sizeof(fastest_team)/sizeof(int))` calculates the number of elements, which is 5.
+    for (size_t i = 0U; i < (sizeof(fastest_team)/sizeof(int)); ++i)
+    {
+        fastest_team[i] = 0;
+    }
+    // for int type values you can use memset to clear memory. This will not
+    // work for float or double.
+    memset(Team_Times, 0, sizeof(Team_Times));
 
     //START OF LOOP
     while (n != 11)
